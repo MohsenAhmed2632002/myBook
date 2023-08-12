@@ -1,17 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:mybook/model.dart';
 
 import 'Featuer/presentation/BookPage.dart';
 
-List imageList = [
-  "assets/images/book.png",
-  "assets/images/book1.png",
-  "assets/images/book2.png",
-  "assets/images/book3.png",
-  "assets/images/book4.png",
-  "assets/images/book5.png",
-  "assets/images/book6.png",
-  "assets/images/book7.png",
+List<MovieModel> imageList = [
+  MovieModel(
+      name: "Harry potter and The Goblet Of Fire ",
+      imagePath: "assets/images/book.png",
+      writer: "J.K. Rowling",
+      rating: 5,
+      cash: 1290),
+  MovieModel(
+      name: "The Jungle Book",
+      imagePath: "assets/images/book1.png",
+      writer: "Rudyaed Kipling",
+      rating: 5,
+      cash: 14500),
+  MovieModel(
+      name: "Star Wars Return Of The Jedi",
+      imagePath: "assets/images/book2.png",
+      writer: "writer",
+      rating: 4.8,
+      cash: 1240),
+  MovieModel(
+      name: "name",
+      imagePath: "assets/images/book3.png",
+      writer: "writer",
+      rating: 5,
+      cash: 570),
+  MovieModel(
+      name: "name",
+      imagePath: "assets/images/book4.png",
+      writer: "writer",
+      rating: 4.9,
+      cash: 6780),
+  MovieModel(
+    name: "name",
+    imagePath: "assets/images/book4.png",
+    writer: "writer",
+    rating: 4.1,
+    cash: 5600,
+  ),
+  MovieModel(
+      name: "name",
+      imagePath: "assets/images/book6.png",
+      writer: "writer",
+      rating: 4.1,
+      cash: 5450),
+  MovieModel(
+      name: "name",
+      imagePath: "assets/images/book7.png",
+      writer: "writer",
+      rating: 4,
+      cash: 4564),
 ];
 
 class ListViewImageList extends StatelessWidget {
@@ -21,7 +63,7 @@ class ListViewImageList extends StatelessWidget {
     required this.imageList,
   });
   final int flex;
-  final List imageList;
+  final List<MovieModel> imageList;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +81,7 @@ class ListViewImageList extends StatelessWidget {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return BookPage(
                       index: index,
-                      imageBook: imageList[index],
+                      imageBook: imageList[index].imagePath,
                     );
                   }));
                 },
@@ -50,7 +92,7 @@ class ListViewImageList extends StatelessWidget {
                       tag: index,
                       child: Image.asset(
                         fit: BoxFit.fill,
-                        "${imageList[index]}",
+                        "${imageList[index].imagePath}",
                         height: 200,
                         width: MediaQuery.sizeOf(context).width / 3,
                       ),
@@ -64,13 +106,21 @@ class ListViewImageList extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text("name${index + 1}"),
+                          Text(
+                            "${imageList[index].name}",
+                            style: TextStyle(fontSize: 25),
+                          ),
+                          Text(
+                            "${imageList[index].writer}",
+                            style:
+                                TextStyle(fontSize: 20, color: Colors.white38),
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text("EP :"),
+                              Text("EP: ${imageList[index].cash}"),
+                              Text("${imageList[index].rating}"),
                               Icon(Icons.star, color: Colors.amber[400]),
-                              Text("book${index + 1}"),
                             ],
                           ),
                         ],
@@ -115,7 +165,7 @@ class BestSellerRow extends StatelessWidget {
 class CarouselSliderView extends StatefulWidget {
   CarouselSliderView(
       {super.key, required this.imageList, required this.activeAnimation});
-  final List imageList;
+  final List<MovieModel> imageList;
   int activeAnimation;
   @override
   State<CarouselSliderView> createState() => _CarouselSliderViewState();
@@ -141,7 +191,7 @@ class _CarouselSliderViewState extends State<CarouselSliderView> {
                         child: Hero(
                           tag: e,
                           child: Image.asset(
-                            e,
+                            e.imagePath,
                             fit: BoxFit.fill,
                             height: 300,
                             width: 200,
@@ -246,7 +296,7 @@ class Detalis extends StatelessWidget {
             ),
           ),
           Text(
-            "Name 1",
+            "${widget}",
             style: TextStyle(fontSize: 30),
           ),
           Text(

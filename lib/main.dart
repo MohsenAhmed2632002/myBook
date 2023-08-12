@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mybook/Featuer/Splash/Splash.dart';
-
-import 'Featuer/home/presentation/views/HomePage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -15,7 +14,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(brightness: Brightness.dark,
+      theme: ThemeData(
+        textTheme: GoogleFonts.abrilFatfaceTextTheme(
+          ThemeData.dark().textTheme,
+        ),
+        brightness: Brightness.dark,
         useMaterial3: true,
       ).copyWith(
         scaffoldBackgroundColor: Color(0xFF100B20),
