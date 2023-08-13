@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:mybook/model.dart';
+import 'package:mybook/Featuer/home/presentation/view_model/model.dart';
 
-import 'Featuer/presentation/BookPage.dart';
+import 'Featuer/home/presentation/views/BookPage.dart';
 
 List<MovieModel> imageList = [
   MovieModel(
@@ -81,7 +81,7 @@ class ListViewImageList extends StatelessWidget {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return BookPage(
                       index: index,
-                      imageBook: imageList[index].imagePath,
+                      singleBook: imageList[index],
                     );
                   }));
                 },
@@ -113,13 +113,23 @@ class ListViewImageList extends StatelessWidget {
                           Text(
                             "${imageList[index].writer}",
                             style:
-                                TextStyle(fontSize: 20, color: Colors.white38),
+                                TextStyle(fontSize: 22, color: Colors.white38),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text("EP: ${imageList[index].cash}"),
-                              Text("${imageList[index].rating}"),
+                              Text(
+                                "EP: ${imageList[index].cash}",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                              Text(
+                                "${imageList[index].rating}",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
                               Icon(Icons.star, color: Colors.amber[400]),
                             ],
                           ),
@@ -221,8 +231,9 @@ class _CarouselSliderViewState extends State<CarouselSliderView> {
 class BuyOrPreViewWidget extends StatelessWidget {
   const BuyOrPreViewWidget({
     super.key,
+    required this.price,
   });
-
+  final double price;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -244,7 +255,7 @@ class BuyOrPreViewWidget extends StatelessWidget {
           width: MediaQuery.sizeOf(context).width / 2.5,
           child: Center(
             child: Text(
-              "12000",
+              "${price}",
               style: TextStyle(color: Colors.black),
             ),
           ),
@@ -290,24 +301,26 @@ class Detalis extends StatelessWidget {
             tag: widget.index,
             child: Image.asset(
               fit: BoxFit.fill,
-              "${widget.imageBook}",
+              "${widget.singleBook.imagePath}",
               height: 250,
               width: MediaQuery.sizeOf(context).width / 3,
             ),
           ),
           Text(
-            "${widget}",
+            "${widget.singleBook.name}",
             style: TextStyle(fontSize: 30),
           ),
           Text(
-            "dis",
+            "${widget.singleBook.writer}",
             style: TextStyle(fontSize: 25),
           ),
           Text(
-            "hi",
+            "${widget.singleBook.cash}",
             style: TextStyle(fontSize: 20),
           ),
-          BuyOrPreViewWidget()
+          BuyOrPreViewWidget(
+            price: widget.singleBook.cash,
+          )
         ],
       ),
     );

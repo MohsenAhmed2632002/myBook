@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mybook/Widgets.dart';
+import 'package:mybook/Featuer/home/presentation/view_model/model.dart';
 
 class BookPage extends StatefulWidget {
-  BookPage({super.key, required this.index, required this.imageBook});
-  final String imageBook;
+  BookPage({super.key, required this.index, required this.singleBook});
+  final MovieModel singleBook;
   final int index;
 
   @override
@@ -18,7 +19,7 @@ class _BookPageState extends State<BookPage> {
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
               Row(
