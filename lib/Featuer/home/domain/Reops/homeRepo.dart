@@ -1,14 +1,7 @@
-class BookRepo {
-  final String name;
-  final String imagePath;
-  final String writer;
-  final double rating;
-  final double cash;
-  BookRepo({
-    required this.cash,
-    required this.name,
-    required this.imagePath,
-    required this.writer,
-    required this.rating,
-  });
-}
+import 'package:mybook/Featuer/home/domain/Entity/BookEntity.dart';
+
+abstract class HomeRepo {
+  Future<List<BookEntity>> fechFeatuerBooks();
+    Future<List<BookEntity>> fechNewestBooks( );
+
+  }

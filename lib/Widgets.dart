@@ -1,54 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:mybook/Featuer/home/domain/Entity/BookEntity.dart';
 import 'package:mybook/Featuer/home/domain/Reops/homeRepo.dart';
 
 import 'Featuer/home/presentation/views/BookPage.dart';
 
-List<BookRepo> imageList = [
-  BookRepo(
+List<BookEntity> imageList = [
+  BookEntity(
       name: "Harry potter and The Goblet Of Fire ",
       imagePath: "assets/images/book.png",
       writer: "J.K. Rowling",
       rating: 5,
       cash: 1290),
-  BookRepo(
+  BookEntity(
       name: "The Jungle Book",
       imagePath: "assets/images/book1.png",
       writer: "Rudyaed Kipling",
       rating: 5,
       cash: 14500),
-  BookRepo(
+  BookEntity(
       name: "Star Wars Return Of The Jedi",
       imagePath: "assets/images/book2.png",
       writer: "writer",
       rating: 4.8,
       cash: 1240),
-  BookRepo(
+  BookEntity(
       name: "name",
       imagePath: "assets/images/book3.png",
       writer: "writer",
       rating: 5,
       cash: 570),
-  BookRepo(
+  BookEntity(
       name: "name",
       imagePath: "assets/images/book4.png",
       writer: "writer",
       rating: 4.9,
       cash: 6780),
-  BookRepo(
+  BookEntity(
     name: "name",
     imagePath: "assets/images/book4.png",
     writer: "writer",
     rating: 4.1,
     cash: 5600,
   ),
-  BookRepo(
+  BookEntity(
       name: "name",
       imagePath: "assets/images/book6.png",
       writer: "writer",
       rating: 4.1,
       cash: 5450),
-  BookRepo(
+  BookEntity(
       name: "name",
       imagePath: "assets/images/book7.png",
       writer: "writer",
@@ -63,7 +64,7 @@ class ListViewImageList extends StatelessWidget {
     required this.imageList,
   });
   final int flex;
-  final List<BookRepo> imageList;
+  final List<BookEntity> imageList;
 
   @override
   Widget build(BuildContext context) {
@@ -175,7 +176,7 @@ class BestSellerRow extends StatelessWidget {
 class CarouselSliderView extends StatefulWidget {
   CarouselSliderView(
       {super.key, required this.imageList, required this.activeAnimation});
-  final List<BookRepo> imageList;
+  final List<BookEntity> imageList;
   int activeAnimation;
   @override
   State<CarouselSliderView> createState() => _CarouselSliderViewState();
