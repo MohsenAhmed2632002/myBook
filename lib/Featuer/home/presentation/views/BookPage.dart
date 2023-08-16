@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mybook/Widgets.dart';
-import 'package:mybook/Featuer/home/presentation/view_model/model.dart';
+import 'package:mybook/Featuer/home/domain/Reops/homeRepo.dart';
 
 class BookPage extends StatefulWidget {
   BookPage({super.key, required this.index, required this.singleBook});
-  final MovieModel singleBook;
+  final BookRepo singleBook;
   final int index;
 
   @override

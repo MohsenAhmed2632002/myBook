@@ -1,10 +1,10 @@
-class MovieModel {
+class BookRepo {
   final String name;
   final String imagePath;
   final String writer;
   final double rating;
   final double cash;
-  MovieModel({
+  BookRepo({
     required this.cash,
     required this.name,
     required this.imagePath,
