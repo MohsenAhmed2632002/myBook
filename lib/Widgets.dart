@@ -1,55 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:mybook/Featuer/home/domain/Entity/BookEntity.dart';
-import 'package:mybook/Featuer/home/domain/Reops/homeRepo.dart';
 
 import 'Featuer/home/presentation/views/BookPage.dart';
 
 List<BookEntity> imageList = [
-  BookEntity(
+  BookEntity(bookId: "1",
       name: "Harry potter and The Goblet Of Fire ",
       imagePath: "assets/images/book.png",
       writer: "J.K. Rowling",
       rating: 5,
       cash: 1290),
-  BookEntity(
+  BookEntity(bookId: "2",
       name: "The Jungle Book",
       imagePath: "assets/images/book1.png",
       writer: "Rudyaed Kipling",
       rating: 5,
       cash: 14500),
-  BookEntity(
+  BookEntity(bookId: "3",
       name: "Star Wars Return Of The Jedi",
       imagePath: "assets/images/book2.png",
       writer: "writer",
       rating: 4.8,
       cash: 1240),
-  BookEntity(
+  BookEntity(bookId: "4",
       name: "name",
       imagePath: "assets/images/book3.png",
       writer: "writer",
       rating: 5,
       cash: 570),
-  BookEntity(
+  BookEntity(bookId: "5",
       name: "name",
       imagePath: "assets/images/book4.png",
       writer: "writer",
       rating: 4.9,
       cash: 6780),
-  BookEntity(
+  BookEntity(bookId: "6",
     name: "name",
     imagePath: "assets/images/book4.png",
     writer: "writer",
     rating: 4.1,
     cash: 5600,
   ),
-  BookEntity(
+  BookEntity(bookId: "7",
       name: "name",
       imagePath: "assets/images/book6.png",
       writer: "writer",
       rating: 4.1,
       cash: 5450),
-  BookEntity(
+  BookEntity(bookId: "8",
       name: "name",
       imagePath: "assets/images/book7.png",
       writer: "writer",
@@ -320,7 +319,7 @@ class Detalis extends StatelessWidget {
             style: TextStyle(fontSize: 20),
           ),
           BuyOrPreViewWidget(
-            price: widget.singleBook.cash,
+            price: widget.singleBook.cash!,
           )
         ],
       ),

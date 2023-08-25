@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen>
         seconds: 2,
       ),
       () {
-        Get.to(() => MyHomePage(),transition: Transition.fadeIn );
+        Get.to(() => MyHomePage(), transition: Transition.fadeIn);
       },
     );
   }
@@ -55,12 +55,10 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: 
-      
-        SlideTransition(
-          position: slideAnimation,
-          child: Image.asset(
-            "assets/images/Logo.png",
+      child: SlideTransition(
+        position: slideAnimation,
+        child: Image.asset(
+          "assets/images/Logo.png",
         ),
       ),
     );
