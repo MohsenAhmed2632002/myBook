@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:mybook/Featuer/home/domain/Entity/BookEntity.dart';
 
-import 'Featuer/home/presentation/views/BookPage.dart';
+import 'BookPage.dart';
 
 List<BookEntity> imageList = [
   BookEntity(bookId: "1",

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mybook/Featuer/home/domain/Entity/BookEntity.dart';
-import 'package:mybook/Widgets.dart';
+import 'package:mybook/Featuer/home/presentation/views/Widgets.dart';
 
 class BookPage extends StatefulWidget {
   BookPage({super.key, required this.index, required this.singleBook});
