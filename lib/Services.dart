@@ -1,52 +1,64 @@
-import 'dart:convert';
+// import 'dart:convert';
 
-import 'package:http/http.dart' as http;
-import 'package:mybook/Featuer/home/data/Model/book_model/book_model.dart';
-import 'package:mybook/Featuer/home/domain/Entity/BookEntity.dart';
+// import 'package:http/http.dart' as http;
+// import 'package:mybook/Featuer/home/data/Model/book_model/book_model.dart';
+// import 'package:mybook/Featuer/home/domain/Entity/BookEntity.dart';
 
-class Api {
-  Future<http.Response> get(
-      {required String url, required String endPoint}) async {
-    http.Response response = await http.get(Uri.parse("${url + endPoint}"));
-    if (response.statusCode == 200) {
-      return response;
-    } else {
-      throw Exception("the response.statusCode${response.statusCode}");
-    }
+import 'package:dio/dio.dart';
+
+class ApiServices {
+  final Dio _dio;
+
+  final String _url = "https://www.googleapis.com/books/v1/";
+  ApiServices(this._dio);
+  Future<Map<String, dynamic>> get({required String endPoint}) async {
+    var res = await _dio.get("$_url$endPoint");
+    return res.data;
   }
+}
+// class Api {
+//   Future<http.Response> get(
+//       {required String url, required String endPoint}) async {
+//     http.Response response = await http.get(Uri.parse("${url + endPoint}"));
+//     if (response.statusCode == 200) {
+//       return response;
+//     } else {
+//       throw Exception("the response.statusCode${response.statusCode}");
+//     }
+//   }
 
-  final String url = "https://www.googleapis.com/books/v1";
+//   final String url = "https://www.googleapis.com/books/v1";
 
-  Future<List<BookEntity>> fechFeatuerBooks() async {
-    final String _endPoint = "volumes?Filtering=free-ebooks&q=programming";
+//   Future<List<BookEntity>> fechFeatuerBooks() async {
+//     final String _endPoint = "volumes?Filtering=free-ebooks&q=programming";
 
-    http.Response _response = await get(url: url, endPoint: _endPoint);
-    Map<String, dynamic> data = jsonDecode(_response.body);
+//     http.Response _response = await get(url: url, endPoint: _endPoint);
+//     Map<String, dynamic> data = jsonDecode(_response.body);
 
-    List<BookEntity> books = [];
-    for (var bookMap in data["items"]) {
-      books.add(
-        BookModel.fromJson(
-          bookMap,
-        ),
-      );
-    }
-    return books;
-  }
+//     List<BookEntity> books = [];
+//     for (var bookMap in data["items"]) {
+//       books.add(
+//         BookModel.fromJson(
+//           bookMap,
+//         ),
+//       );
+//     }
+//     return books;
+//   }
 
-  Future<List<BookEntity>> fechNewestBooks() async {
-    final String _endPoint =
-        "volumes?Filtering=free-ebooks&Sorting=newest&q=programming";
+//   Future<List<BookEntity>> fechNewestBooks() async {
+//     final String _endPoint =
+//         "volumes?Filtering=free-ebooks&Sorting=newest&q=programming";
 
-    http.Response _response = await get(url: url, endPoint: _endPoint);
-    Map<String, dynamic> data = jsonDecode(_response.body);
+//     http.Response _response = await get(url: url, endPoint: _endPoint);
+//     Map<String, dynamic> data = jsonDecode(_response.body);
 
-    List<BookEntity> books = [];
-    for (var bookMap in data["items"]) {
-      books.add(BookModel.fromJson(bookMap));
-    }
-    return books;
-  }
+//     List<BookEntity> books = [];
+//     for (var bookMap in data["items"]) {
+//       books.add(BookModel.fromJson(bookMap));
+//     }
+//     return books;
+//   }
 
   // Future post({required String url, @required dynamic body}) async {
   //   http.Response response = await http.post(
@@ -78,7 +90,7 @@ class Api {
   //     throw Exception("the response.statusCode${response.statusCode}");
   //   }
   // }
-}
+// }
 
 // class ProductsService {
 //   final String _baseUrl = "https://fakestoreapi.com/products";

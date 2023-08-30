@@ -4,6 +4,7 @@ import 'package:mybook/Featuer/home/data/Model/book_model/book_model.dart';
 import 'package:mybook/Featuer/home/domain/Entity/BookEntity.dart';
 import 'package:mybook/Services.dart';
 import 'package:http/http.dart' as http;
+
 abstract class HomeRemoteDataSourcess {
   Future<List<BookEntity>> fechFeatuerBooks();
   Future<List<BookEntity>> fechNewestBooks();
@@ -11,16 +12,16 @@ abstract class HomeRemoteDataSourcess {
 
 class HomeRemoteDataSourcessImpl extends HomeRemoteDataSourcess {
   // https://www.googleapis.com/books/v1/volumes?Filtering=free-ebooks&q=computerscience
-  late Api api;
+  late ApiServices apiServices;
   final String url = "https://www.googleapis.com/books/v1";
   final String _endPoint = "volumes?Filtering=free-ebooks&q=programming";
 
-  HomeRemoteDataSourcessImpl(Api api);
+  HomeRemoteDataSourcessImpl(ApiServices api);
   @override
   Future<List<BookEntity>> fechFeatuerBooks() async {
-
-    http.Response _response = await api.get(url: url, endPoint: _endPoint);
-          Map<String, dynamic> data = jsonDecode(_response.body);
+  var data= await apiServices.get(endPoint: _endPoint);
+    // http.Response _response = await ApiServices.get(url: url, endPoint: _endPoint);
+    //       Map<String, dynamic> data = jsonDecode(_response.body);
 
     List<BookEntity> books = [];
     for (var bookMap in data["items"]) {
@@ -30,11 +31,12 @@ class HomeRemoteDataSourcessImpl extends HomeRemoteDataSourcess {
   }
 
   @override
-  Future<List<BookEntity>> fechNewestBooks()async {
-      final String _endPoint = "volumes?Filtering=free-ebooks&Sorting=newest&q=programming";
+  Future<List<BookEntity>> fechNewestBooks() async {
+    final String _endPoint =
+        "volumes?Filtering=free-ebooks&Sorting=newest&q=programming";
 
-     http.Response _response = await api.get(url: url, endPoint: _endPoint);
-               Map<String, dynamic> data = jsonDecode(_response.body);
+   var data = await apiServices.get( endPoint: _endPoint);
+    
 
     List<BookEntity> books = [];
     for (var bookMap in data["items"]) {

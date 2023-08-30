@@ -48,10 +48,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 create: (context) => FechFeatuerBooksCubit(
                   FechFeatuerBooksUseCase(
                     HomeRepoImpl(
-//  final String url = "https://www.googleapis.com/books/v1";
-//   final String _endPoint = "volumes?Filtering=free-ebooks&q=programming";
 
-                      homeRemoteDataSourcessImpl: HomeRemoteDataSourcessImpl(Api()),
+                      homeRemoteDataSourcessImpl:,
                     ),
                   ),
                 ),
