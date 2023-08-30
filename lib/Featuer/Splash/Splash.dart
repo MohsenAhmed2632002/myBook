@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen>
     AnimaitonSplash();
     Future.delayed(
       Duration(
-        seconds: 2,
+        seconds: 4,
       ),
       () {
         Get.to(() => MyHomePage(), transition: Transition.fadeIn);
@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen>
     animationController = AnimationController(
       vsync: this,
       duration: Duration(
-        seconds: 1,
+        seconds: 3,
       ),
     );
     slideAnimation = Tween<Offset>(

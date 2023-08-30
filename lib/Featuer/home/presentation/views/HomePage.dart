@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mybook/Featuer/home/data/data_sour/home_rem_data_sources.dart';
+import 'package:mybook/Featuer/home/data/home_repo/home_repo_impl.dart';
+import 'package:mybook/Featuer/home/domain/Use_Cases/fechFeatuerBooksUseCase.dart';
+import 'package:mybook/Featuer/home/presentation/Manger/FeatuerBooks/fech_featuer_books_cubit.dart';
 import 'package:mybook/Featuer/home/presentation/views/Widgets.dart';
+import 'package:mybook/Services.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({super.key});
@@ -38,8 +44,20 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(
                 height: 10,
               ),
-              CarouselSliderView(
-                  imageList: imageList, activeAnimation: activeAnimation!),
+              BlocProvider(
+                create: (context) => FechFeatuerBooksCubit(
+                  FechFeatuerBooksUseCase(
+                    HomeRepoImpl(
+//  final String url = "https://www.googleapis.com/books/v1";
+//   final String _endPoint = "volumes?Filtering=free-ebooks&q=programming";
+
+                      homeRemoteDataSourcessImpl: HomeRemoteDataSourcessImpl(Api()),
+                    ),
+                  ),
+                ),
+                child: CarouselSliderView(
+                    imageList: imageList, activeAnimation: activeAnimation!),
+              ),
               BestSellerRow(),
               ListViewImageList(imageList: imageList, flex: 8),
             ],

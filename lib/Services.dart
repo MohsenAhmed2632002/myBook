@@ -1,14 +1,51 @@
+import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:mybook/Featuer/home/data/Model/book_model/book_model.dart';
+import 'package:mybook/Featuer/home/domain/Entity/BookEntity.dart';
 
 class Api {
-  Future<http.Response> get({required String url,required String endPoint}) async {
-    http.Response response = await http.get(Uri.parse("${url+endPoint}"));
+  Future<http.Response> get(
+      {required String url, required String endPoint}) async {
+    http.Response response = await http.get(Uri.parse("${url + endPoint}"));
     if (response.statusCode == 200) {
       return response;
     } else {
       throw Exception("the response.statusCode${response.statusCode}");
     }
+  }
+
+  final String url = "https://www.googleapis.com/books/v1";
+
+  Future<List<BookEntity>> fechFeatuerBooks() async {
+    final String _endPoint = "volumes?Filtering=free-ebooks&q=programming";
+
+    http.Response _response = await get(url: url, endPoint: _endPoint);
+    Map<String, dynamic> data = jsonDecode(_response.body);
+
+    List<BookEntity> books = [];
+    for (var bookMap in data["items"]) {
+      books.add(
+        BookModel.fromJson(
+          bookMap,
+        ),
+      );
+    }
+    return books;
+  }
+
+  Future<List<BookEntity>> fechNewestBooks() async {
+    final String _endPoint =
+        "volumes?Filtering=free-ebooks&Sorting=newest&q=programming";
+
+    http.Response _response = await get(url: url, endPoint: _endPoint);
+    Map<String, dynamic> data = jsonDecode(_response.body);
+
+    List<BookEntity> books = [];
+    for (var bookMap in data["items"]) {
+      books.add(BookModel.fromJson(bookMap));
+    }
+    return books;
   }
 
   // Future post({required String url, @required dynamic body}) async {
