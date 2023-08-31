@@ -1,9 +1,7 @@
-import 'dart:convert';
-
 import 'package:mybook/Featuer/home/data/Model/book_model/book_model.dart';
 import 'package:mybook/Featuer/home/domain/Entity/BookEntity.dart';
 import 'package:mybook/Services.dart';
-import 'package:http/http.dart' as http;
+import "package:hive/hive.dart";
 
 abstract class HomeRemoteDataSourcess {
   Future<List<BookEntity>> fechFeatuerBooks();
@@ -19,7 +17,7 @@ class HomeRemoteDataSourcessImpl extends HomeRemoteDataSourcess {
   HomeRemoteDataSourcessImpl(ApiServices api);
   @override
   Future<List<BookEntity>> fechFeatuerBooks() async {
-  var data= await apiServices.get(endPoint: _endPoint);
+    var data = await apiServices.get(endPoint: _endPoint);
     // http.Response _response = await ApiServices.get(url: url, endPoint: _endPoint);
     //       Map<String, dynamic> data = jsonDecode(_response.body);
 
@@ -27,6 +25,8 @@ class HomeRemoteDataSourcessImpl extends HomeRemoteDataSourcess {
     for (var bookMap in data["items"]) {
       books.add(BookModel.fromJson(bookMap));
     }
+    var box = Hive.box("FeatueredBox");
+    box.addAll(books);
     return books;
   }
 
@@ -35,13 +35,14 @@ class HomeRemoteDataSourcessImpl extends HomeRemoteDataSourcess {
     final String _endPoint =
         "volumes?Filtering=free-ebooks&Sorting=newest&q=programming";
 
-   var data = await apiServices.get( endPoint: _endPoint);
-    
+    var data = await apiServices.get(endPoint: _endPoint);
 
     List<BookEntity> books = [];
     for (var bookMap in data["items"]) {
       books.add(BookModel.fromJson(bookMap));
     }
+     var box = Hive.box("NewestBox");
+    box.addAll(books);
     return books;
   }
 }

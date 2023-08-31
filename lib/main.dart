@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:mybook/Featuer/Splash/Splash.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
+import 'package:mybook/Featuer/home/domain/Entity/BookEntity.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
+  await Hive.initFlutter();
+  Hive.registerAdapter(BookEntityAdapter());
+  await Hive.openBox<BookEntity>("FeatueredBox");
+  await Hive.openBox<BookEntity>("NewestBox");
 }
 
 class MyApp extends StatelessWidget {
