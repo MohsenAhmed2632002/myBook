@@ -35,13 +35,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     height: 50,
                     fit: BoxFit.fitWidth,
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.search,
-                      size: 30,
-                    ),
-                  ),
+                  // IconButton(
+                  //   onPressed: () {},
+                  //   icon: Icon(
+                  //     Icons.search,
+                  //     size: 30,
+                  //   ),
+                  // ),
                 ],
               ),
               SizedBox(

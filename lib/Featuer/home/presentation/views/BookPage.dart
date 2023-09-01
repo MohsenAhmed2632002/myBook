@@ -42,10 +42,6 @@ class _BookPageState extends State<BookPage> {
               Detalis(
                 widget: widget,
               ),
-              // ListViewImageList(
-              //   imageList: imageList,
-              //   flex: 2,
-              // ),
             ],
           ),
         ),

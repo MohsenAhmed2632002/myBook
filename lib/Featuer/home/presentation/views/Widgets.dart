@@ -4,7 +4,6 @@ import 'package:mybook/Featuer/home/domain/Entity/BookEntity.dart';
 
 import 'BookPage.dart';
 
-
 class ListViewImageList extends StatelessWidget {
   const ListViewImageList({
     required this.flex,
@@ -68,7 +67,7 @@ class ListViewImageList extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text(
-                                "EP: ${imageList[index].cash}",
+                                "EP: ${imageList[index].cash ?? 200}",
                                 style: TextStyle(
                                   fontSize: 15,
                                 ),
@@ -177,6 +176,91 @@ class _CarouselSliderViewState extends State<CarouselSliderView> {
   }
 }
 
+class Detalis extends StatelessWidget {
+  const Detalis({
+    super.key,
+    required this.widget,
+  });
+
+  final BookPage widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 4,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Hero(
+            tag: widget.index,
+            child: Image.network(
+              fit: BoxFit.fill,
+              "${widget.singleBook.imagePath}",
+              height: 250,
+              width: MediaQuery.sizeOf(context).width / 3,
+            ),
+          ),
+          Text(
+            "${widget.singleBook.name}",
+            style: TextStyle(fontSize: 30),
+          ),
+          Text(
+            "${widget.singleBook.writer}",
+            style: TextStyle(fontSize: 25),
+          ),
+          Text(
+            "${widget.singleBook.cash ?? 200}",
+            style: TextStyle(fontSize: 20),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(
+                      12,
+                    ),
+                    bottomLeft: Radius.circular(
+                      12,
+                    ),
+                  ),
+                ),
+                height: MediaQuery.sizeOf(context).height / 10,
+                width: MediaQuery.sizeOf(context).width / 2.5,
+                child: Center(
+                  child: Text(
+                    "${widget.singleBook.cash ?? 200}",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.amberAccent[700],
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(
+                      12,
+                    ),
+                    bottomRight: Radius.circular(
+                      12,
+                    ),
+                  ),
+                ),
+                height: MediaQuery.sizeOf(context).height / 10,
+                width: MediaQuery.sizeOf(context).width / 2.5,
+                child: Center(child: Text("Free Previwe")),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
 class BuyOrPreViewWidget extends StatelessWidget {
   const BuyOrPreViewWidget({
     super.key,
@@ -204,7 +288,7 @@ class BuyOrPreViewWidget extends StatelessWidget {
           width: MediaQuery.sizeOf(context).width / 2.5,
           child: Center(
             child: Text(
-              "${price}",
+              "${price ?? 200}",
               style: TextStyle(color: Colors.black),
             ),
           ),
@@ -226,52 +310,6 @@ class BuyOrPreViewWidget extends StatelessWidget {
           child: Center(child: Text("Free Previwe")),
         ),
       ],
-    );
-  }
-}
-
-class Detalis extends StatelessWidget {
-  const Detalis({
-    super.key,
-    required this.widget,
-  });
-
-  final BookPage widget;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      flex: 4,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Hero(
-            tag: widget.index,
-            child: Image.asset(
-              fit: BoxFit.fill,
-              "${widget.singleBook.imagePath}",
-              height: 250,
-              width: MediaQuery.sizeOf(context).width / 3,
-            ),
-          ),
-          Text(
-            "${widget.singleBook.name}",
-            style: TextStyle(fontSize: 30),
-          ),
-          Text(
-            "${widget.singleBook.writer}",
-            style: TextStyle(fontSize: 25),
-          ),
-          Text(
-            "${widget.singleBook.cash}",
-            style: TextStyle(fontSize: 20),
-          ),
-          BuyOrPreViewWidget(
-            price: widget.singleBook.cash!,
-          )
-        ],
-      ),
     );
   }
 }
