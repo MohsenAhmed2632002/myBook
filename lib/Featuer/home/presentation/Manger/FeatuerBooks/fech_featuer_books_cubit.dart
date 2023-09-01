@@ -6,8 +6,7 @@ import 'package:mybook/Featuer/home/domain/Use_Cases/fechFeatuerBooksUseCase.dar
 part 'fech_featuer_books_state.dart';
 
 class FechFeatuerBooksCubit extends Cubit<FechFeatuerBooksState> {
-  FechFeatuerBooksCubit(this.fechFeatuerBooksUseCase)
-      : super(FechFeatuerBooksInitial());
+  FechFeatuerBooksCubit(this.fechFeatuerBooksUseCase): super(FechFeatuerBooksInitial());
   final FechFeatuerBooksUseCase fechFeatuerBooksUseCase;
   Future fechFeatuerBook() async {
     emit(FechFeatuerBooksLoading());

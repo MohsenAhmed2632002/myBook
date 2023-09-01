@@ -1,9 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mybook/Featuer/home/data/data_sour/home_loca_data_sources.dart';
+import 'package:mybook/Featuer/home/data/data_sour/home_rem_data_sources.dart';
 import 'package:mybook/Featuer/home/data/home_repo/home_repo_impl.dart';
 import 'package:mybook/Featuer/home/domain/Use_Cases/fechFeatuerBooksUseCase.dart';
 import 'package:mybook/Featuer/home/presentation/Manger/FeatuerBooks/fech_featuer_books_cubit.dart';
 import 'package:mybook/Featuer/home/presentation/views/Widgets.dart';
+import 'package:mybook/Services.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({super.key});
@@ -46,8 +50,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 create: (context) => FechFeatuerBooksCubit(
                   FechFeatuerBooksUseCase(
                     HomeRepoImpl(
-
-                      homeRemoteDataSourcessImpl:,
+                      homeLocalDataSourcess: HomeLocalDataSourcessImpl(),
+                      homeRemoteDataSourcessImpl: HomeRemoteDataSourcessImpl(
+                        ApiServices(
+                          Dio(),
+                        ),
+                      ),
                     ),
                   ),
                 ),
