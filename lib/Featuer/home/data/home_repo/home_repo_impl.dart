@@ -33,7 +33,7 @@ class HomeRepoImpl extends HomeRepo {
       if (booksList.isNotEmpty) {
         return booksList;
       }
-      var books = await homeRemoteDataSourcessImpl.fechNewestBooks  ();
+      dynamic books = await homeRemoteDataSourcessImpl.fechNewestBooks();
       return books;
     } on Exception catch (e) {
       print("Exception $e");

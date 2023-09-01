@@ -1,19 +1,19 @@
 part of 'newest_books_cubit.dart';
 
 @immutable
-sealed class NewestBooksState {}
+sealed class FechNewestBooksState {}
 
-final class NewestBooksInitial extends NewestBooksState {}
-final class FechFeatuerBooksInitial extends NewestBooksState {}
+final class FechNewestBooksInitial extends FechNewestBooksState {}
+final class FechFeatuerBooksInitial extends FechNewestBooksState {}
 
-final class FechNewestBooksSuccess extends NewestBooksState {
+final class FechNewestBooksSuccess extends FechNewestBooksState {
   final List<BookEntity> myNewestBook;
   FechNewestBooksSuccess(this.myNewestBook);
 }
 
-final class FechNewestBooksLoading extends NewestBooksState {}
+final class FechNewestBooksLoading extends FechNewestBooksState {}
 
-final class FechNewestBooksFaulier extends NewestBooksState {
+final class FechNewestBooksFaulier extends FechNewestBooksState {
   final String EM;
   FechNewestBooksFaulier(this.EM);
 }

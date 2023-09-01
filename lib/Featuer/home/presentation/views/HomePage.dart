@@ -1,13 +1,14 @@
-import 'package:dio/dio.dart';
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mybook/Featuer/home/data/data_sour/home_loca_data_sources.dart';
-import 'package:mybook/Featuer/home/data/data_sour/home_rem_data_sources.dart';
 import 'package:mybook/Featuer/home/data/home_repo/home_repo_impl.dart';
 import 'package:mybook/Featuer/home/domain/Use_Cases/fechFeatuerBooksUseCase.dart';
+import 'package:mybook/Featuer/home/domain/Use_Cases/fechNewestBooksUseCase.dart';
 import 'package:mybook/Featuer/home/presentation/Manger/FeatuerBooks/fech_featuer_books_cubit.dart';
+import 'package:mybook/Featuer/home/presentation/Manger/cubit/newest_books_cubit.dart';
 import 'package:mybook/Featuer/home/presentation/views/Widgets.dart';
-import 'package:mybook/Services.dart';
+import 'package:mybook/main.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({super.key});
@@ -48,22 +49,49 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               BlocProvider(
                 create: (context) => FechFeatuerBooksCubit(
-                  FechFeatuerBooksUseCase(
-                    HomeRepoImpl(
-                      homeLocalDataSourcess: HomeLocalDataSourcessImpl(),
-                      homeRemoteDataSourcessImpl: HomeRemoteDataSourcessImpl(
-                        ApiServices(
-                          Dio(),
-                        ),
-                      ),
-                    ),
-                  ),
+                  FechFeatuerBooksUseCase(getIt.get<HomeRepoImpl>()),
+                )..fechFeatuerBook(),
+                child:
+                    BlocBuilder<FechFeatuerBooksCubit, FechFeatuerBooksState>(
+                  builder: (context, state) {
+                    if (state is FechFeatuerBooksSuccess) {
+                      return CarouselSliderView(
+                          imageList: state.myBook,
+                          activeAnimation: activeAnimation!);
+                    } else if (state is FechFeatuerBooksFaulier) {
+                      return Center(
+                        child: Text("${state.EM}"),
+                      );
+                    } else if (state is FechFeatuerBooksLoading) {
+                      return CircularProgressIndicator();
+                    }
+                    return Text("${state}");
+                  },
                 ),
-                child: CarouselSliderView(
-                    imageList: imageList, activeAnimation: activeAnimation!),
               ),
               BestSellerRow(),
-              ListViewImageList(imageList: imageList, flex: 8),
+              BlocProvider(
+                create: (context) => FechNewestBooksCubit(
+                  FechNewestBooksUseCase(
+                    getIt.get<HomeRepoImpl>(),
+                  ),
+                )..fechNewestBook(),
+                child: BlocBuilder<FechNewestBooksCubit, FechNewestBooksState>(
+                  builder: (context, state) {
+                    if (state is FechNewestBooksSuccess) {
+                      return ListViewImageList(
+                          imageList: state.myNewestBook, flex: 8);
+                    } else if (state is FechNewestBooksLoading) {
+                      return CircularProgressIndicator();
+                    } else if (state is FechNewestBooksFaulier) {
+                      Center(
+                        child: Text("${state.EM}"),
+                      );
+                    }
+                    return SizedBox();
+                  },
+                ),
+              ),
             ],
           ),
         ),

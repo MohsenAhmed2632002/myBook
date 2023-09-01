@@ -4,57 +4,6 @@ import 'package:mybook/Featuer/home/domain/Entity/BookEntity.dart';
 
 import 'BookPage.dart';
 
-List<BookEntity> imageList = [
-  BookEntity(bookId: "1",
-      name: "Harry potter and The Goblet Of Fire ",
-      imagePath: "assets/images/book.png",
-      writer: "J.K. Rowling",
-      rating: 5,
-      cash: 1290),
-  BookEntity(bookId: "2",
-      name: "The Jungle Book",
-      imagePath: "assets/images/book1.png",
-      writer: "Rudyaed Kipling",
-      rating: 5,
-      cash: 14500),
-  BookEntity(bookId: "3",
-      name: "Star Wars Return Of The Jedi",
-      imagePath: "assets/images/book2.png",
-      writer: "writer",
-      rating: 4.8,
-      cash: 1240),
-  BookEntity(bookId: "4",
-      name: "name",
-      imagePath: "assets/images/book3.png",
-      writer: "writer",
-      rating: 5,
-      cash: 570),
-  BookEntity(bookId: "5",
-      name: "name",
-      imagePath: "assets/images/book4.png",
-      writer: "writer",
-      rating: 4.9,
-      cash: 6780),
-  BookEntity(bookId: "6",
-    name: "name",
-    imagePath: "assets/images/book4.png",
-    writer: "writer",
-    rating: 4.1,
-    cash: 5600,
-  ),
-  BookEntity(bookId: "7",
-      name: "name",
-      imagePath: "assets/images/book6.png",
-      writer: "writer",
-      rating: 4.1,
-      cash: 5450),
-  BookEntity(bookId: "8",
-      name: "name",
-      imagePath: "assets/images/book7.png",
-      writer: "writer",
-      rating: 4,
-      cash: 4564),
-];
 
 class ListViewImageList extends StatelessWidget {
   const ListViewImageList({
@@ -90,7 +39,7 @@ class ListViewImageList extends StatelessWidget {
                   children: [
                     Hero(
                       tag: index,
-                      child: Image.asset(
+                      child: Image.network(
                         fit: BoxFit.fill,
                         "${imageList[index].imagePath}",
                         height: 200,
@@ -98,7 +47,7 @@ class ListViewImageList extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: 15,
+                      width: 10,
                     ),
                     Container(
                       height: 200,
@@ -108,12 +57,12 @@ class ListViewImageList extends StatelessWidget {
                         children: [
                           Text(
                             "${imageList[index].name}",
-                            style: TextStyle(fontSize: 25),
+                            style: TextStyle(fontSize: 18),
                           ),
                           Text(
                             "${imageList[index].writer}",
                             style:
-                                TextStyle(fontSize: 22, color: Colors.white38),
+                                TextStyle(fontSize: 15, color: Colors.white38),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -121,13 +70,13 @@ class ListViewImageList extends StatelessWidget {
                               Text(
                                 "EP: ${imageList[index].cash}",
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 15,
                                 ),
                               ),
                               Text(
                                 "${imageList[index].rating}",
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 15,
                                 ),
                               ),
                               Icon(Icons.star, color: Colors.amber[400]),
@@ -200,7 +149,7 @@ class _CarouselSliderViewState extends State<CarouselSliderView> {
                         onTap: () {},
                         child: Hero(
                           tag: e,
-                          child: Image.asset(
+                          child: Image.network(
                             e.imagePath,
                             fit: BoxFit.fill,
                             height: 300,

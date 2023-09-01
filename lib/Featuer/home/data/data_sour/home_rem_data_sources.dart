@@ -10,11 +10,11 @@ abstract class HomeRemoteDataSourcess {
 
 class HomeRemoteDataSourcessImpl extends HomeRemoteDataSourcess {
   // https://www.googleapis.com/books/v1/volumes?Filtering=free-ebooks&q=computerscience
-  late ApiServices apiServices;
+  final ApiServices apiServices;
   final String url = "https://www.googleapis.com/books/v1";
   final String _endPoint = "volumes?Filtering=free-ebooks&q=programming";
 
-  HomeRemoteDataSourcessImpl(ApiServices api);
+  HomeRemoteDataSourcessImpl(this.apiServices);
   @override
   Future<List<BookEntity>> fechFeatuerBooks() async {
     var data = await apiServices.get(endPoint: _endPoint);
@@ -23,9 +23,9 @@ class HomeRemoteDataSourcessImpl extends HomeRemoteDataSourcess {
 
     List<BookEntity> books = [];
     for (var bookMap in data["items"]) {
-      books.add(BookModel.fromJson(bookMap));
+      books.add(BookModel?.fromJson(bookMap));
     }
-    var box = Hive.box("FeatueredBox");
+    var box = Hive.box<BookEntity>("FeatueredBox");
     box.addAll(books);
     return books;
   }
@@ -39,9 +39,9 @@ class HomeRemoteDataSourcessImpl extends HomeRemoteDataSourcess {
 
     List<BookEntity> books = [];
     for (var bookMap in data["items"]) {
-      books.add(BookModel.fromJson(bookMap));
+      books.add(BookModel?.fromJson(bookMap));
     }
-     var box = Hive.box("NewestBox");
+    var box = Hive.box<BookEntity>("NewestBox");
     box.addAll(books);
     return books;
   }

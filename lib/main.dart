@@ -1,17 +1,34 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:mybook/Featuer/Splash/Splash.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:mybook/Featuer/home/domain/Entity/BookEntity.dart';
+import 'package:get_it/get_it.dart';
+import 'package:mybook/Services.dart';
+
+import 'Featuer/home/data/data_sour/home_loca_data_sources.dart';
+import 'Featuer/home/data/data_sour/home_rem_data_sources.dart';
+import 'Featuer/home/data/home_repo/home_repo_impl.dart';
 
 void main() async {
-  runApp(const MyApp());
   await Hive.initFlutter();
   Hive.registerAdapter(BookEntityAdapter());
   await Hive.openBox<BookEntity>("FeatueredBox");
   await Hive.openBox<BookEntity>("NewestBox");
+  getIt.registerSingleton( HomeRepoImpl(
+                      homeLocalDataSourcess: HomeLocalDataSourcessImpl(),
+                      homeRemoteDataSourcessImpl: HomeRemoteDataSourcessImpl(
+                        ApiServices(
+                          Dio(),
+                        ),
+                      ),
+                    ),);
+  runApp(const MyApp());
 }
+
+final getIt = GetIt.instance;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

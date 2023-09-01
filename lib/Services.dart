@@ -8,7 +8,11 @@ import 'package:dio/dio.dart';
 
 class ApiServices {
   final Dio _dio;
-
+//  if (_apiServices != null) {
+//       var data = await _apiServices.get(endPoint: "yourEndPoint");
+//       // استخدم البيانات هنا
+//     } else {
+//       throw Exception("apiServices has not been initialized");
   final String _url = "https://www.googleapis.com/books/v1/";
   ApiServices(this._dio);
   Future<Map<String, dynamic>> get({required String endPoint}) async {
